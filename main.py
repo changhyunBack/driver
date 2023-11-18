@@ -71,7 +71,7 @@ if file is not None:
 
         result = pd.DataFrame(prediction)
         result= result.melt()
-        result['variable']=result['variable'].map({0:'창현',1:'도윤',2:'현선'})
+        result['variable']=result['variable'].map({0:'창현',1:'현선',2:'도윤'})
 
 
         # 단일 예측값
@@ -81,13 +81,13 @@ if file is not None:
         if pred ==0:
             pred='창현'
         elif pred==1:
-            pred='도윤'
-        elif pred==2:
             pred='현선'
+        elif pred==2:
+            pred='도윤'
         else:
             pred='Known'
         
-        labels=['창현','도윤','현선']
+        labels=['창현','현선','도윤']
         prob=prediction.ravel()
         chart_data={'labels':labels, 'prob':prob}
         #chart_data=px.data.tips()
