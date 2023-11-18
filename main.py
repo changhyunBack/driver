@@ -6,6 +6,7 @@ import joblib
 from pyparsing import empty
 import matplotlib.pyplot as plt # 새로추가 
 import os 
+import matplotlib.font_manager as fm
 
 def fontRegistered():
     font_dirs = [os.getcwd() + '/customFonts']
