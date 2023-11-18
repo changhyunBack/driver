@@ -16,8 +16,9 @@ def fontRegistered():
         fm.fontManager.addfont(font_file)
     fm._load_fontmanager(try_read_cache=False)
 fontRegistered()
-fontNames = [f.name for f in fm.fontManager.ttflist][0]
+fontNames = [f.name for f in fm.fontManager.ttflist]
 #fontname = st.selectbox("폰트 선택", unique(fontNames))
+fontname=fontNames[0]
 plt.rc('font', family=fontname)
 
 st.set_page_config(layout="wide")
