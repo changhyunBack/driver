@@ -8,6 +8,10 @@ import matplotlib.pyplot as plt # 새로추가
 import os 
 import matplotlib.font_manager as fm
 
+def unique(list):
+    x = np.array(list)
+    return np.unique(x)
+
 def fontRegistered():
     font_dirs = [os.getcwd() + '/customFonts']
     font_files = fm.findSystemFonts(fontpaths=font_dirs)
