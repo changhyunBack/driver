@@ -5,6 +5,7 @@ import tensorflow as tf
 import joblib
 from pyparsing import empty
 import matplotlib.pyplot as plt # 새로추가 
+import plotly.express as px
 
 st.set_page_config(layout="wide")
 # con1 : 제목, 파일 넣기 
@@ -85,16 +86,23 @@ if file is not None:
             pred='현선'
         else:
             pred='Known'
-        color=['royalblue','coral','palegreen']
-        labels=['창현','도윤','현선']
-        sizes=prediction.ravel()
-        wedgeprops = {'width':0.6, 'linewidth':1, 'edgecolor':'black'}
         
-        fig1, ax1 = plt.subplots(figsize=(5,5))
-        ax1.pie(sizes,labels=labels,autopct='%1.1f%%',wedgeprops=wedgeprops,pctdistance=0.7,textprops={'fontsize': 12},labeldistance=1.1,colors=color)
-        ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-        ax1.set_facecolor('none')
-        st.pyplot(fig1)
+        labels=['창현','도윤','현선']
+        prob=prediction.ravel()
+        chart_data={'labels':labels, 'prob':prob}
+        #chart_data=px.data.tips()
+        fig=px.pie(chart_data,values='prob',names='labels')
+        fig.update_traces(hole=.4,textfont_size=20)
+        # 라벨 크기 및 그래프 크기 조정
+        fig.update_layout(
+            title=dict(text='Probability', font=dict(size=20)),  # 타이틀 폰트 크기 조정
+            showlegend=True,  # 범례 표시 여부
+            legend=dict(title=dict(text='Categories', font=dict(size=15))),  # 범례 폰트 크기 조정
+            font=dict(size=12),  # 라벨 폰트 크기 조정
+            margin=dict(l=0, r=0, b=0, t=30),  # 그래프의 여백 조정
+        )
+
+        st.plotly_chart(fig)
         
         
     with con3:
@@ -103,17 +111,6 @@ if file is not None:
             # st.write(df.head(50).style.set_table_styles([{'selector': 'tr', 'props': [('max-height', '400px'),('max-column','400px')]}]))
             num_rows_to_display = len(df)
             st.write(f"Uploaded DataFrame : {num_rows_to_display}")
-            st.write(df.head(num_rows_to_display).style.set_table_styles([{'selector': 'tr', 'props': [('max-height', '400px'), ('max-column', '400px')]}]))
+            st.write(df.head(num_rows_to_display).style.set_table_styles([{'selector': 'tr', 'props': [('max-height', '200px'), ('max-column', '200px')]}]))
             st.markdown(f"<h3 style='margin-left: 150px; margin-right: 0px;'> 운전자는 {round(pred_prob * 100,2)}%로 [{pred}] 입니다</h3>", unsafe_allow_html=True)
 
-# Pie chart, where the slices will be ordered and plotted counter-clockwise:
-# labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
-# sizes = [15, 30, 45, 10]
-# explode = (0, 0.1, 0, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
-
-# fig1, ax1 = plt.subplots()
-# ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
-#         shadow=True, startangle=90)
-# ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-
-# st.pyplot(fig1)
