@@ -6,8 +6,6 @@ import joblib
 from pyparsing import empty
 import matplotlib.pyplot as plt # 새로추가 
 
-plt.rcParams['font.family'] = 'NanumGothic'
-
 st.set_page_config(layout="wide")
 # con1 : 제목, 파일 넣기 
 empty1,con1,empty2 = st.columns([0.3,0.4,0.3])
@@ -87,13 +85,13 @@ if file is not None:
             pred='현선'
         else:
             pred='Known'
-        
+        color=['royalblue','coral','palegreen']
         labels=['창현','도윤','현선']
         sizes=prediction.ravel()
         wedgeprops = {'width':0.6, 'linewidth':1, 'edgecolor':'black'}
         
         fig1, ax1 = plt.subplots(figsize=(5,5))
-        ax1.pie(sizes,labels=labels,autopct='%1.1f%%',wedgeprops=wedgeprops,pctdistance=0.7,textprops={'fontsize': 12},labeldistance=1.1)
+        ax1.pie(sizes,labels=labels,autopct='%1.1f%%',wedgeprops=wedgeprops,pctdistance=0.7,textprops={'fontsize': 12},labeldistance=1.1,colors=color)
         ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
         ax1.set_facecolor('none')
         st.pyplot(fig1)
