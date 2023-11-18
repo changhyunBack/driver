@@ -5,8 +5,7 @@ import tensorflow as tf
 import joblib
 from pyparsing import empty
 import matplotlib.pyplot as plt # 새로추가 
-sudo apt-get update
-sudo apt-get install -y fonts-nanum
+
 plt.rcParams['font.family'] = 'NanumGothic'
 
 st.set_page_config(layout="wide")
