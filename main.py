@@ -5,6 +5,7 @@ import tensorflow as tf
 import joblib
 from pyparsing import empty
 import matplotlib.pyplot as plt # 새로추가 
+import os 
 
 def fontRegistered():
     font_dirs = [os.getcwd() + '/customFonts']
