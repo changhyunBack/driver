@@ -15,11 +15,6 @@ def fontRegistered():
     for font_file in font_files:
         fm.fontManager.addfont(font_file)
     fm._load_fontmanager(try_read_cache=False)
-fontRegistered()
-fontNames = [f.name for f in fm.fontManager.ttflist]
-#fontname = st.selectbox("폰트 선택", unique(fontNames))
-fontname=fontNames[0]
-plt.rc('font', family=fontname)
 
 st.set_page_config(layout="wide")
 # con1 : 제목, 파일 넣기 
@@ -104,6 +99,11 @@ if file is not None:
         labels=['창현','도윤','현선']
         sizes=prediction.ravel()
         wedgeprops = {'width':0.6, 'linewidth':1, 'edgecolor':'black'}
+
+        fontRegistered()
+        fontNames = [f.name for f in fm.fontManager.ttflist]
+        fontname = st.selectbox("폰트 선택", unique(fontNames))
+        plt.rc('font', family=fontname)
         
         fig1, ax1 = plt.subplots(figsize=(5,5))
         ax1.pie(sizes,labels=labels,autopct='%1.1f%%',wedgeprops=wedgeprops,pctdistance=0.7,textprops={'fontsize': 12},labeldistance=1.1)
