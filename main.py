@@ -5,8 +5,19 @@ import tensorflow as tf
 import joblib
 from pyparsing import empty
 import matplotlib.pyplot as plt # 새로추가 
-plt.rcParams['font.family'] = 'Malgun Gothic'
-# plt.rcParams['font.family']='AppleGothic'
+
+def fontRegistered():
+    font_dirs = [os.getcwd() + '/customFonts']
+    font_files = fm.findSystemFonts(fontpaths=font_dirs)
+
+    for font_file in font_files:
+        fm.fontManager.addfont(font_file)
+    fm._load_fontmanager(try_read_cache=False)
+fontRegistered()
+fontNames = [f.name for f in fm.fontManager.ttflist][0]
+#fontname = st.selectbox("폰트 선택", unique(fontNames))
+plt.rc('font', family=fontname)
+
 st.set_page_config(layout="wide")
 # con1 : 제목, 파일 넣기 
 empty1,con1,empty2 = st.columns([0.3,0.4,0.3])
